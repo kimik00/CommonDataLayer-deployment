@@ -1,0 +1,31 @@
+command = "cdl/target/debug/command-service postgres"
+start-delay = "2s"
+# start-after = ["another.toml", "second.toml"]
+stdout = "cspg.log"
+stderr = "cspg.log"
+user = "esavier"
+working-directory = "."
+
+[restart]
+strategy = "never"
+backoff = "0s"
+attempts = 0
+
+[healthiness]
+http-endpoint = "http://localhost:8080/healthcheck"
+file-path = "/var/myservice/up"
+
+[failure]
+successful-exit-code = [ 0, 1, 255]
+strategy = "ignore"
+
+[environment]
+keep-env = false
+#re-export = [ "PATH", "DB_PASS"]
+additional = {KAFKA_INPUT_BROKERS = "localhost:9092",KAFKA_INPUT_GROUP_ID = "cspg",KAFKA_INPUT_TOPIC = "internal",POSTGRES_USERNAME = "postgres",POSTGRES_PASSWORD = "postgres",POSTGRES_HOST = "localhost",POSTGRES_PORT = "5432",POSTGRES_DBNAME = "cdl",RUST_LOG = "debug",REPORT_BROKER = "localhost:9092",REPORT_TOPIC = "trace"}
+
+[termination]
+signal = "TERM"
+wait = "2s"
+#die-if-failed  = [ "db.toml"]
+

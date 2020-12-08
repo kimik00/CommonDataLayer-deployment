@@ -1,0 +1,49 @@
+command = "cdl/target/debug/data-router"
+start-delay = "2s"
+# start-after = ["another.toml", "second.toml"]
+stdout = "dr.log"
+stderr = "dr.log"
+user = "esavier"
+working-directory = "."
+
+[restart]
+strategy = "never"
+backoff = "0s"
+attempts = 0
+
+#[healthiness]
+#http-endpoint = "http://localhost:8080/healthcheck"
+#file-path = "/var/myservice/up"
+
+[failure]
+successful-exit-code = [ 0, 1, 255]
+strategy = "ignore"
+
+[environment]
+keep-env = false
+#re-export = [ "PATH", "DB_PASS"]
+additional = {KAFKA_TOPIC="input",KAFKA_BROKERS="localhost:9092",KAFKA_GROUP_ID="dr",KAFKA_ERROR_CHANNEL="error",SCHEMA_REGISTRY_ADDR="http://localhost:6400",CACHE_CAPACITY="500",RUST_LOG="trace"}
+
+#	KAFKA_TOPIC = "input"
+#	KAFKA_BROKERS = "localhost:9092"
+#	KAFKA_GROUP_ID = "dr"
+#	KAFKA_ERROR_CHANNEL = "error"
+#	SCHEMA_REGISTRY_ADDR = "localhost:6400"
+#	CACHE_CAPACITY = "500"
+#	RUST_LOG = "debug"
+
+
+
+# KAFKA_BROKERS
+# KAFKA_GROUP_ID = "data-router"
+# KAFKA_ERROR_CHANNEL = "error"
+# SCHEMA_REGISTRY_ADDR = "localhost:12345"
+# CACHE_CAPACITY = 500
+# RUST_LOG = "trace"
+
+
+[termination]
+signal = "TERM"
+wait = "2s"
+#die-if-failed  = [ "db.toml"]
+
