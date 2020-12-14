@@ -3,7 +3,7 @@ start-delay = "2s"
 # start-after = ["another.toml", "second.toml"]
 stdout = "cspg.log"
 stderr = "cspg.log"
-user = "esavier"
+user = "someuser"
 working-directory = "."
 
 [restart]

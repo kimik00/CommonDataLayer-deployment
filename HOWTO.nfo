@@ -18,6 +18,10 @@ ln -s /path/to/your/repo/CommonDataLayer cdl
 cd cdl
 cargo build
 
+# - services need some configuration first, basically you need to fix "user" field
+# | and set it to your user
+# | `user = "someuser"` to `user = "youruser"`
+# | inside each service file
 
 # Start infrastructure
 

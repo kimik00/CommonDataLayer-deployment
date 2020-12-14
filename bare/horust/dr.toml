@@ -3,7 +3,7 @@ start-delay = "2s"
 # start-after = ["another.toml", "second.toml"]
 stdout = "dr.log"
 stderr = "dr.log"
-user = "esavier"
+user = "someuser"
 working-directory = "."
 
 [restart]
